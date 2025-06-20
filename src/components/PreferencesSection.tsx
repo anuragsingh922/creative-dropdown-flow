@@ -54,87 +54,125 @@ const PreferencesSection = () => {
   ];
 
   return (
-    <div className="p-6 space-y-8">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <FormField 
-          label="Caste Preference" 
-          options={casteOptions}
-          defaultValue="Open to specific castes"
-        />
+    <div className="p-8 space-y-10 bg-gradient-to-br from-purple-50 to-white">
+      {/* Partner Preferences */}
+      <div className="space-y-6">
+        <div className="border-l-4 border-purple-500 pl-4">
+          <h3 className="text-xl font-bold text-gray-800 mb-2">Partner Preferences</h3>
+          <p className="text-gray-600">Define your ideal partner characteristics</p>
+        </div>
         
-        <div className="space-y-3">
-          <label className="text-sm font-medium text-gray-700">Specific Castes</label>
-          <div className="flex gap-2">
-            <Badge variant="outline" className="bg-purple-50 text-purple-700 border-purple-200">
-              INTERCASTE
-            </Badge>
-            <Badge variant="outline" className="bg-purple-50 text-purple-700 border-purple-200">
-              ARYA VYSYA
-            </Badge>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div className="space-y-6">
+            <FormField 
+              label="Caste Preference" 
+              options={casteOptions}
+              defaultValue="Open to specific castes"
+              variant="purple"
+            />
+            
+            <FormField 
+              label="Horoscope Preference" 
+              options={horoscopeOptions}
+              defaultValue="Flexible"
+              variant="purple"
+            />
+          </div>
+          
+          <div className="space-y-6">
+            <div className="space-y-3">
+              <label className="text-sm font-semibold text-gray-700">Specific Castes</label>
+              <div className="flex gap-2 flex-wrap">
+                <Badge className="bg-purple-100 text-purple-800 border-purple-200 px-3 py-1 hover:bg-purple-200 transition-colors">
+                  INTERCASTE
+                </Badge>
+                <Badge className="bg-purple-100 text-purple-800 border-purple-200 px-3 py-1 hover:bg-purple-200 transition-colors">
+                  ARYA VYSYA
+                </Badge>
+              </div>
+            </div>
+            
+            <div className="space-y-3">
+              <label className="text-sm font-semibold text-gray-700">Location Preference</label>
+              <div className="flex gap-2 flex-wrap">
+                {locationOptions.slice(0, 3).map((location) => (
+                  <Badge key={location} className="bg-blue-100 text-blue-800 border-blue-200 px-3 py-1 hover:bg-blue-200 transition-colors">
+                    {location}
+                  </Badge>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <FormField 
-          label="Horoscope Preference" 
-          options={horoscopeOptions}
-          defaultValue="Flexible"
-        />
+      {/* Visa & Immigration */}
+      <div className="space-y-6 pt-6 border-t border-purple-100">
+        <div className="border-l-4 border-purple-500 pl-4">
+          <h3 className="text-xl font-bold text-gray-800 mb-2">Visa & Immigration Status</h3>
+          <p className="text-gray-600">Specify visa preferences for international matches</p>
+        </div>
         
-        <div className="space-y-3">
-          <label className="text-sm font-medium text-gray-700">Location Preference</label>
-          <div className="flex gap-2 flex-wrap">
-            {locationOptions.slice(0, 3).map((location) => (
-              <Badge key={location} variant="outline" className="bg-blue-50 text-blue-700 border-blue-200">
-                {location}
+        <div className="bg-white p-6 rounded-xl border border-purple-100 shadow-sm">
+          <label className="text-sm font-semibold text-gray-700 mb-4 block">Visa Preference</label>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
+            {visaOptions.map((visa) => (
+              <Badge 
+                key={visa} 
+                variant={visa === "H1B" ? "default" : "outline"}
+                className={`text-center justify-center py-2 transition-all duration-200 cursor-pointer ${
+                  visa === "H1B" 
+                    ? "bg-purple-600 text-white hover:bg-purple-700 shadow-md" 
+                    : "bg-gray-50 text-gray-700 border-gray-200 hover:bg-purple-50 hover:text-purple-700 hover:border-purple-200"
+                }`}
+              >
+                {visa}
               </Badge>
             ))}
           </div>
         </div>
       </div>
 
-      <div className="space-y-4">
-        <label className="text-sm font-medium text-gray-700">Visa Preference</label>
-        <div className="flex gap-2 flex-wrap">
-          {visaOptions.map((visa) => (
-            <Badge 
-              key={visa} 
-              variant={visa === "H1B" ? "default" : "outline"}
-              className={visa === "H1B" ? "bg-purple-600 text-white" : "bg-gray-50 text-gray-700 border-gray-200 hover:bg-gray-100"}
-            >
-              {visa}
-            </Badge>
-          ))}
+      {/* Life Expectations */}
+      <div className="space-y-6 pt-6 border-t border-purple-100">
+        <div className="border-l-4 border-purple-500 pl-4">
+          <h3 className="text-xl font-bold text-gray-800 mb-2">Life & Family Expectations</h3>
+          <p className="text-gray-600">Share your expectations about family life and future plans</p>
         </div>
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <FormField 
-          label="Kids in Future" 
-          options={kidsOptions}
-          defaultValue="Yes"
-        />
         
-        <FormField 
-          label="Wedding Expectation" 
-          options={weddingOptions}
-          defaultValue="Grand Affair: Large guest list including..."
-        />
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <FormField 
-          label="Financial Support to Parents" 
-          options={financialOptions}
-          defaultValue="No financial support needed"
-        />
-        
-        <FormField 
-          label="Opinion on Gifts" 
-          options={giftOptions}
-          defaultValue="Strictly No Gifts"
-        />
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div className="space-y-6">
+            <FormField 
+              label="Kids in Future" 
+              options={kidsOptions}
+              defaultValue="Yes"
+              variant="purple"
+            />
+            
+            <FormField 
+              label="Financial Support to Parents" 
+              options={financialOptions}
+              defaultValue="No financial support needed"
+              variant="purple"
+            />
+          </div>
+          
+          <div className="space-y-6">
+            <FormField 
+              label="Wedding Expectation" 
+              options={weddingOptions}
+              defaultValue="Grand Affair: Large guest list including..."
+              variant="purple"
+            />
+            
+            <FormField 
+              label="Opinion on Gifts" 
+              options={giftOptions}
+              defaultValue="Strictly No Gifts"
+              variant="purple"
+            />
+          </div>
+        </div>
       </div>
     </div>
   );
